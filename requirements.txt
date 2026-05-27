@@ -1,8 +1,9 @@
 streamlit
 tensorflow-cpu==2.13.0
+keras==2.13.1
 numpy
 pandas
 opencv-python-headless
 Pillow
 scikit-learn
-
+streamlit-drawable-canvas

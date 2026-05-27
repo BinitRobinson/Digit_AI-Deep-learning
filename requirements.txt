@@ -1,6 +1,7 @@
 streamlit
-tensorflow-cpu
+tensorflow==2.15.0
 numpy
+pandas
+opencv-python-headless
 Pillow
-plotly
-streamlit-drawable-canvas
+scikit-learn

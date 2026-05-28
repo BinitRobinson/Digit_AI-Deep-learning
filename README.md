@@ -11,6 +11,12 @@ A deep learning web app that recognizes handwritten digits in real time — buil
 
 ---
 
+## 🖼️ Preview
+
+![Digit Recognizer App Screenshot](digit.png)
+
+---
+
 ## ✨ Features
 
 - ✏️ **Draw a digit** on an interactive canvas using your mouse or touch
@@ -18,26 +24,6 @@ A deep learning web app that recognizes handwritten digits in real time — buil
 - 🎯 **Instant prediction** with digit display and confidence percentage
 - 🌑 **Dark mode UI** — pure black background with neon cyan/green accents
 - ⚡ **MNIST-faithful preprocessing** — tight crop, centering, and normalization
-
----
-
-## 🖼️ Preview
-
-```
-┌─────────────────────────────────────────────────┐
-│            🧠 Digit Recognizer                  │
-│       DEEP LEARNING · ANN & CNN · MNIST         │
-├──────────────────┬──────────────────────────────┤
-│  [ ANN ]  [ CNN ]│                              │
-│                  │         Predicted             │
-│  ┌────────────┐  │              7               │
-│  │            │  │                              │
-│  │  canvas    │  │         Confidence           │
-│  │            │  │          98.24%              │
-│  └────────────┘  │       ████████████░          │
-│  [ ⬡ PREDICT ]  │          ⬡ CNN               │
-└──────────────────┴──────────────────────────────┘
-```
 
 ---
 
@@ -50,6 +36,7 @@ digit-recognizer/
 ├── ann_model.onnx          # Trained ANN model (~97% accuracy)
 ├── cnn_model.onnx          # Trained CNN model (~99% accuracy)
 ├── digit_recognition.ipynb # Training + ONNX export notebook
+├── digit.png               # App screenshot
 ├── requirements.txt        # Python dependencies
 └── README.md
 ```
@@ -126,7 +113,7 @@ streamlit-drawable-canvas==0.9.3
 Raw canvas drawings go through an MNIST-faithful pipeline before prediction:
 
 ```
-RGBA canvas (400×400)
+RGBA canvas (280×280)
   │
   ├─ Extract RGB brightness (ignore alpha — always 255)
   ├─ Threshold > 30 to isolate stroke pixels

@@ -1,5 +1,7 @@
 # 🧠 Digit Recognizer AI
 
+App-**https://digitai-deep-learning-4phwxyqud2siuisns3glkj.streamlit.app/**
+
 A deep learning web app that recognizes handwritten digits in real time — built with **Streamlit**, **TensorFlow**, and trained on the **MNIST** dataset.
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python)

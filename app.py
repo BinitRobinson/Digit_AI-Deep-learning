@@ -6,7 +6,7 @@ from PIL import Image
 st.set_page_config(
     page_title="Digit Recognizer AI",
     page_icon="🧠",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="collapsed",
 )
 
@@ -15,11 +15,9 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap');
 
 * { font-family: 'Space Grotesk', sans-serif !important; }
-
 .stApp { background: #000000 !important; color: #e2e8f0; }
 #MainMenu, footer, header { visibility: hidden; }
 [data-testid="collapsedControl"] { display: none; }
-
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
@@ -27,19 +25,19 @@ st.markdown("""
 /* ── Hero ── */
 .hero-wrap {
     text-align: center;
-    padding: 2.2rem 0 0.8rem;
+    padding: 1.8rem 0 0.6rem;
     position: relative;
 }
 .hero-wrap::before {
     content: '';
     position: absolute;
     top: 0; left: 50%; transform: translateX(-50%);
-    width: 500px; height: 160px;
+    width: 400px; height: 120px;
     background: radial-gradient(ellipse, rgba(0,245,255,0.07) 0%, transparent 70%);
     pointer-events: none;
 }
 .hero-title {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -1px;
     background: linear-gradient(90deg, #00f5ff, #00ff88, #00f5ff);
@@ -52,180 +50,124 @@ st.markdown("""
 @keyframes shimmer { 0% { background-position: 0% } 100% { background-position: 200% } }
 .hero-sub {
     color: #2d3748;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-top: 0.35rem;
+    margin-top: 0.3rem;
 }
 .hero-divider {
-    width: 60px; height: 2px;
+    width: 50px; height: 2px;
     background: linear-gradient(90deg, #00f5ff, #00ff88);
-    margin: 0.8rem auto 0;
+    margin: 0.6rem auto 0;
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0,245,255,0.5);
 }
 
-/* ── Model toggle switch ── */
+/* ── Model toggle ── */
 div[data-testid="column"]:has(.sw-active),
 div[data-testid="column"]:has(.sw-inactive) {
-    padding: 4px !important;
+    padding: 3px !important;
 }
-
-/* ACTIVE — solid filled, unmissable */
 .sw-active .stButton > button {
-    background: linear-gradient(135deg, rgba(0,245,255,0.22), rgba(0,255,136,0.12)) !important;
+    background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(0,255,136,0.1)) !important;
     border: 2px solid #00f5ff !important;
     color: #00f5ff !important;
-    font-size: 1.1rem !important;
+    font-size: 0.95rem !important;
     font-weight: 800 !important;
-    letter-spacing: 4px !important;
+    letter-spacing: 3px !important;
     text-transform: uppercase !important;
-    border-radius: 12px !important;
-    box-shadow: 0 0 28px rgba(0,245,255,0.45), 0 0 8px rgba(0,245,255,0.2) inset !important;
-    padding: 0.65rem 1rem !important;
-    text-shadow: 0 0 12px rgba(0,245,255,0.8) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 22px rgba(0,245,255,0.4), 0 0 8px rgba(0,245,255,0.15) inset !important;
+    padding: 0.5rem 1rem !important;
+    text-shadow: 0 0 10px rgba(0,245,255,0.8) !important;
 }
-.sw-active .stButton > button:hover {
-    background: linear-gradient(135deg, rgba(0,245,255,0.3), rgba(0,255,136,0.18)) !important;
-    box-shadow: 0 0 40px rgba(0,245,255,0.6) !important;
-}
-
-/* INACTIVE — clearly dimmed */
 .sw-inactive .stButton > button {
     background: #0a0a0a !important;
     border: 2px solid rgba(255,255,255,0.07) !important;
     color: #374151 !important;
-    font-size: 1.1rem !important;
+    font-size: 0.95rem !important;
     font-weight: 700 !important;
-    letter-spacing: 4px !important;
+    letter-spacing: 3px !important;
     text-transform: uppercase !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     box-shadow: none !important;
-    padding: 0.65rem 1rem !important;
+    padding: 0.5rem 1rem !important;
 }
 .sw-inactive .stButton > button:hover {
     border-color: rgba(0,245,255,0.2) !important;
     color: #6b7280 !important;
 }
 
-/* ── Neon card ── */
-.neon-card {
+/* ── Canvas card ── */
+.canvas-card {
     background: #0a0a0a;
     border: 1px solid rgba(0,245,255,0.12);
-    border-radius: 20px;
-    padding: 1.6rem;
+    border-radius: 16px;
+    padding: 1.2rem;
     position: relative;
     overflow: hidden;
 }
-.neon-card::before {
+.canvas-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.5), transparent);
-}
-
-/* ── Section label ── */
-.sec-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #00f5ff;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.sec-label::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(90deg, rgba(0,245,255,0.2), transparent);
-}
-
-/* ── Canvas hint ── */
-.canvas-hint {
-    color: #1e293b;
-    font-size: 0.72rem;
-    text-align: center;
-    margin-top: 0.5rem;
-    letter-spacing: 1px;
-}
-
-/* ── Predict button ── */
-.stButton > button {
-    background: transparent !important;
-    border: 1.5px solid #00f5ff !important;
-    color: #00f5ff !important;
-    border-radius: 10px !important;
-    font-weight: 700 !important;
-    font-size: 0.85rem !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase !important;
-    padding: 0.6rem 2rem !important;
-    width: 100% !important;
-    margin-top: 0.8rem !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 0 10px rgba(0,245,255,0.15) !important;
-}
-.stButton > button:hover {
-    background: rgba(0,245,255,0.07) !important;
-    box-shadow: 0 0 28px rgba(0,245,255,0.4) !important;
-    transform: translateY(-2px) !important;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.4), transparent);
 }
 
 /* ── Result card ── */
 .result-card {
     background: #070707;
     border: 1px solid rgba(0,255,136,0.15);
-    border-radius: 20px;
-    padding: 2.5rem 1.5rem 2rem;
+    border-radius: 16px;
+    padding: 1.2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 300px;
 }
 .result-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,255,136,0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0,255,136,0.4), transparent);
 }
 .result-pre {
     font-size: 0.6rem;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #2d3748;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.2rem;
 }
 .result-digit {
-    font-size: 9rem;
+    font-size: 7rem;
     font-weight: 800;
     line-height: 1;
     color: #00ff88;
-    text-shadow: 0 0 50px rgba(0,255,136,0.5), 0 0 100px rgba(0,255,136,0.15);
+    text-shadow: 0 0 40px rgba(0,255,136,0.5), 0 0 80px rgba(0,255,136,0.15);
 }
 .result-conf-label {
     font-size: 0.6rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: #2d3748;
-    margin: 1rem 0 0.2rem;
+    margin: 0.6rem 0 0.15rem;
 }
 .result-conf {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #00f5ff;
-    text-shadow: 0 0 20px rgba(0,245,255,0.5);
+    text-shadow: 0 0 16px rgba(0,245,255,0.5);
 }
 .cbar-wrap {
-    width: 80%;
+    width: 85%;
     background: #111;
     border-radius: 50px;
-    height: 5px;
-    margin: 0.8rem auto 0;
+    height: 4px;
+    margin: 0.6rem auto 0;
     overflow: hidden;
 }
 .cbar-fill {
@@ -238,13 +180,13 @@ div[data-testid="column"]:has(.sw-inactive) {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.25rem 0.8rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 50px;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-top: 1.2rem;
+    margin-top: 0.8rem;
 }
 .mbadge-ann { color: #00f5ff; border: 1px solid rgba(0,245,255,0.3); background: rgba(0,245,255,0.05); }
 .mbadge-cnn { color: #00ff88; border: 1px solid rgba(0,255,136,0.3); background: rgba(0,255,136,0.05); }
@@ -252,19 +194,83 @@ div[data-testid="column"]:has(.sw-inactive) {
 /* ── Empty state ── */
 .empty-state {
     border: 1px dashed #111;
-    border-radius: 20px;
-    padding: 4rem 2rem;
+    border-radius: 16px;
     text-align: center;
     background: #050505;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 420px;
+    min-height: 300px;
+    padding: 2rem;
 }
-.empty-icon { font-size: 3.5rem; opacity: 0.15; }
-.empty-text { color: #1a202c; font-size: 0.82rem; margin-top: 1rem; letter-spacing: 1px; line-height: 1.8; }
+.empty-icon { font-size: 2.5rem; opacity: 0.12; }
+.empty-text { color: #1a202c; font-size: 0.78rem; margin-top: 0.8rem; letter-spacing: 1px; line-height: 1.8; }
+
+/* ── Section label ── */
+.sec-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00f5ff;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.sec-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(0,245,255,0.2), transparent);
+}
+
+/* ── Canvas hint ── */
+.canvas-hint {
+    color: #1e293b;
+    font-size: 0.68rem;
+    text-align: center;
+    margin-top: 0.4rem;
+    letter-spacing: 1px;
+}
+
+/* ── Predict button ── */
+.stButton > button {
+    background: transparent !important;
+    border: 1.5px solid #00f5ff !important;
+    color: #00f5ff !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    padding: 0.5rem 1rem !important;
+    width: 100% !important;
+    margin-top: 0.6rem !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 0 10px rgba(0,245,255,0.15) !important;
+}
+.stButton > button:hover {
+    background: rgba(0,245,255,0.07) !important;
+    box-shadow: 0 0 24px rgba(0,245,255,0.4) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ── Clear button — always visible, red tint ── */
+.clear-btn .stButton > button {
+    border-color: rgba(255, 70, 70, 0.6) !important;
+    color: rgba(255, 70, 70, 0.8) !important;
+    box-shadow: 0 0 8px rgba(255,70,70,0.15) !important;
+    margin-top: 0.6rem !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 2px !important;
+}
+.clear-btn .stButton > button:hover {
+    background: rgba(255,70,70,0.08) !important;
+    border-color: rgba(255,70,70,0.9) !important;
+    color: rgba(255,70,70,1) !important;
+    box-shadow: 0 0 20px rgba(255,70,70,0.35) !important;
+    transform: translateY(-1px) !important;
+}
 
 /* ── Alerts ── */
 .stAlert { background: #0a0a0a !important; border-radius: 10px !important; border-left-color: #00f5ff !important; }
@@ -272,7 +278,7 @@ div[data-testid="column"]:has(.sw-inactive) {
 """, unsafe_allow_html=True)
 
 
-# ─── ONNX model loading — works on any Python version ─────────────────────────
+# ─── ONNX model loading ────────────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
 def load_models():
     import onnxruntime as ort
@@ -305,27 +311,26 @@ st.markdown("""
 # ─── Load models ──────────────────────────────────────────────────────────────
 models = load_models()
 if not models:
-    st.error("No models found. Place ann_model.h5 and cnn_model.keras in the same folder.")
+    st.error("No models found. Place ann_model.onnx and cnn_model.onnx in the same folder.")
     st.stop()
 
-# ─── Model toggle switch ──────────────────────────────────────────────────────
+# ─── Model toggle ─────────────────────────────────────────────────────────────
 if "model_choice" not in st.session_state:
     st.session_state.model_choice = list(models.keys())[0]
 
-# Render the switch bar with invisible Streamlit buttons overlaid via columns
-_, sw_col, _ = st.columns([1, 1.4, 1])
+_, sw_col, _ = st.columns([1, 1.2, 1])
 with sw_col:
-    btn_col1, btn_col2 = st.columns(2)
-    with btn_col1:
-        ann_cls = "sw-active" if st.session_state.model_choice == "ANN" else "sw-inactive"
-        st.markdown(f'<div class="{ann_cls}">', unsafe_allow_html=True)
+    b1, b2 = st.columns(2)
+    with b1:
+        cls = "sw-active" if st.session_state.model_choice == "ANN" else "sw-inactive"
+        st.markdown(f'<div class="{cls}">', unsafe_allow_html=True)
         if st.button("ANN", key="sw_ann", use_container_width=True):
             st.session_state.model_choice = "ANN"
             st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
-    with btn_col2:
-        cnn_cls = "sw-active" if st.session_state.model_choice == "CNN" else "sw-inactive"
-        st.markdown(f'<div class="{cnn_cls}">', unsafe_allow_html=True)
+    with b2:
+        cls = "sw-active" if st.session_state.model_choice == "CNN" else "sw-inactive"
+        st.markdown(f'<div class="{cls}">', unsafe_allow_html=True)
         if st.button("CNN", key="sw_cnn", use_container_width=True):
             st.session_state.model_choice = "CNN"
             st.rerun()
@@ -333,28 +338,43 @@ with sw_col:
 
 model_choice = st.session_state.model_choice
 
-# ─── Main layout — 50 / 50 ────────────────────────────────────────────────────
-col_left, col_right = st.columns([1, 1], gap="large")
+st.markdown("<div style='margin-top:0.8rem'></div>", unsafe_allow_html=True)
 
-# ── LEFT: Canvas ──────────────────────────────────────────────────────────────
+# ─── Main layout ─────────────────────────────────────────────────────────────
+col_left, col_right = st.columns([1, 1], gap="medium")
+
+# ── LEFT: Canvas ─────────────────────────────────────────────────────────────
 with col_left:
-    st.markdown('<div class="neon-card">', unsafe_allow_html=True)
+    st.markdown('<div class="canvas-card">', unsafe_allow_html=True)
     st.markdown('<div class="sec-label">✦ Draw a Digit</div>', unsafe_allow_html=True)
 
     try:
         from streamlit_drawable_canvas import st_canvas
+
+        # canvas key tied to session counter so Clear button resets it
+        if "canvas_key" not in st.session_state:
+            st.session_state.canvas_key = 0
+
         canvas_result = st_canvas(
             fill_color="rgba(0,0,0,0)",
-            stroke_width=24,
+            stroke_width=22,
             stroke_color="#FFFFFF",
             background_color="#000000",
-            height=400,
-            width=400,
+            height=280,
+            width=280,
             drawing_mode="freedraw",
-            key="digit_canvas",
+            key=f"canvas_{st.session_state.canvas_key}",
         )
         st.markdown('<div class="canvas-hint">— draw with mouse or touch —</div>', unsafe_allow_html=True)
+
         predict_btn = st.button("⬡  PREDICT", key="predict_draw")
+
+        # Always-visible clear button
+        st.markdown('<div class="clear-btn">', unsafe_allow_html=True)
+        if st.button("✕  CLEAR", key="clear_canvas"):
+            st.session_state.canvas_key += 1
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     except ImportError:
         st.error("Run: pip install streamlit-drawable-canvas")
@@ -378,7 +398,6 @@ with col_right:
                     <div class="empty-text">Canvas is empty<br>draw a digit first</div>
                 </div>""", unsafe_allow_html=True)
             else:
-                # ── MNIST-faithful preprocessing ──────────────────────────────
                 rgb  = rgba[:, :, :3].astype("float32")
                 gray = 0.299*rgb[:,:,0] + 0.587*rgb[:,:,1] + 0.114*rgb[:,:,2]
 
@@ -424,7 +443,7 @@ with col_right:
             st.markdown("""
             <div class="empty-state">
                 <div class="empty-icon">🎯</div>
-                <div class="empty-text">Draw something and hit Predict</div>
+                <div class="empty-text">Draw something and<br>hit Predict</div>
             </div>""", unsafe_allow_html=True)
     else:
         st.markdown("""

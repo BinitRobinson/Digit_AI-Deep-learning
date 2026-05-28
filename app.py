@@ -431,11 +431,6 @@ with col_right:
                 <div class="result-card">
                     <div class="result-pre">Predicted Digit</div>
                     <div class="result-digit">{digit}</div>
-                    <div class="result-conf-label">Confidence</div>
-                    <div class="result-conf">{conf:.2f}%</div>
-                    <div class="cbar-wrap">
-                        <div class="cbar-fill" style="width:{min(conf,100):.1f}%"></div>
-                    </div>
                     <span class="mbadge {badge_cls}">⬡ {model_choice}</span>
                 </div>
                 """, unsafe_allow_html=True)
